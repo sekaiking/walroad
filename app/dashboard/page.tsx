@@ -1,6 +1,10 @@
 import { CreatorDashboard } from "@/ui/CreatorDashboard";
 import { queryAllCollections } from "@/lib/suiContract";
 
+// Disable caching for this page - blockchain data changes frequently
+export const revalidate = 0; // Disable cache, always fetch fresh data
+export const dynamic = 'force-dynamic'; // Force dynamic rendering
+
 async function getAllProducts() {
 	try {
 		const products = await queryAllCollections();

@@ -4,6 +4,10 @@ import { queryAllCollections } from '@/lib/suiContract';
 import { ProductCardItem } from '@/ui/ProductCardItem';
 import { FaPlusCircle, FaStore, FaShieldAlt, FaWallet, FaGlobe } from 'react-icons/fa';
 
+// Disable caching for this page - blockchain data changes frequently
+export const revalidate = 0; // Disable cache, always fetch fresh data
+export const dynamic = 'force-dynamic'; // Force dynamic rendering
+
 async function getFeaturedProducts() {
 	try {
 		const allCollections = await queryAllCollections();

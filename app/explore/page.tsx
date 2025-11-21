@@ -1,10 +1,15 @@
 import { ProductMarketplace } from "@/ui/ProductMarketplace";
 import { queryAllCollections } from "@/lib/suiContract";
 
+// Disable caching for this page - blockchain data changes frequently
+export const revalidate = 0; // Disable cache, always fetch fresh data
+export const dynamic = 'force-dynamic'; // Force dynamic rendering
+
 async function getAllProducts() {
 	try {
 		const products = await queryAllCollections();
 		const filteredProducts = products.filter(p => p.visibility !== 'unlisted');
+		console.log(filteredProducts)
 		console.log('Loaded', filteredProducts.length, 'public products from blockchain');
 		return filteredProducts;
 	} catch (error) {
