@@ -1,8 +1,14 @@
 "use client";
 
-import { CreateProductForm } from "@/ui/CreateProductForm";
+import dynamic from "next/dynamic";
 
-export const dynamic = 'force-dynamic';
+export const dynamicParams = false;
+
+// Dynamically import the form component with no SSR to avoid WASM loading issues
+const CreateProductForm = dynamic(
+	() => import("@/ui/CreateProductForm").then(mod => ({ default: mod.CreateProductForm })),
+	{ ssr: false }
+);
 
 export default function UploadPage() {
 	return (
